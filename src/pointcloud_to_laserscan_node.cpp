@@ -192,7 +192,7 @@ void PointCloudToLaserScanNode::cloudCallback(
         ranges[index] = std::min(ranges[index], range);
     }
 
-    scan_msg->ranges = ranges;
+    scan_msg->ranges.assign(ranges.begin(), ranges.end());
     pub_->publish(std::move(scan_msg));
 
     auto end = std::chrono::steady_clock::now();
